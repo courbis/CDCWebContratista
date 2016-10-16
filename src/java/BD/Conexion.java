@@ -17,7 +17,7 @@ public class Conexion {
     private final String password = "6186";
     // Indica al controlador que debe utilizar un cursor de servidor, // lo que permite más de una instrucción activa // en una conexión.
     private final String selectMethod = "cursor";
-
+//nuevo comentario
     // Constructor public Connect(){}
     private String getConnectionUrl() {
         return url + serverName + ":" + portNumber + ";databaseName=" + databaseName + ";selectMethod=" + selectMethod + ";";
