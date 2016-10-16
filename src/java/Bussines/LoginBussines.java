@@ -5,10 +5,15 @@
  */
 package Bussines;
 
+import DAO.usuarioDAO;
 import Entidad.Usuario;
+import com.sun.corba.se.impl.activation.ServerMain;
 import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,12 +29,19 @@ public class LoginBussines extends HttpServlet {
 
 String user="";
 String pass="";
-    public void obtenerDatosAutenticacion(){
-        Usuario usuario= new Usuario();
-        usuario.setRut(user);
-        usuario.setPass(pass);
-        
-    }
+String nombre="";
+String apellido="";
+
+    public void obtenerDatosAutenticacion() throws SQLException{
+        usuarioDAO uDAO= new usuarioDAO();
+      
+        uDAO.autenticacion(user,pass);
+        nombre=uDAO.nombre();
+        apellido=uDAO.apellido();
+        }
+    
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,9 +52,13 @@ String pass="";
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         user=request.getParameter("user");
         pass=request.getParameter("pass");        
+        
+        obtenerDatosAutenticacion();
+      
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -52,7 +68,8 @@ String pass="";
             out.println("<title>Servlet LoginBussines</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("El usuario es= "+user+" y la password es= "+pass);
+            out.println("rut: "+user+" pass: "+pass+" <br>");
+            out.println("Bienvenido "+nombre+" "+apellido);
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,7 +87,11 @@ String pass="";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    try {
         processRequest(request, response);
+    } catch (SQLException ex) {
+        Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -84,7 +105,11 @@ String pass="";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    try {
         processRequest(request, response);
+    } catch (SQLException ex) {
+        Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
