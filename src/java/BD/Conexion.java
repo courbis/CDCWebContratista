@@ -17,7 +17,7 @@ public class Conexion {
         return conectarBD();
     }
 
-    public Connection conectarBD() throws SQLException {
+    public static Connection conectarBD() throws SQLException {
         Connection con = null;
 
         try {
