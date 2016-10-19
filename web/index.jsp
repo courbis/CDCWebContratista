@@ -1,3 +1,5 @@
+<%@page import="Bussines.LoginBussines"%>
+<%@page import="java.sql.SQLException"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -18,7 +20,7 @@ and open the template in the editor.
                 <div class="span4"></div>
                 <div class="span4">
                     <div class="contenedorLogin">
-                    <h2>AutenticaciÃ³n</h2>
+                    <h2>Autenticación</h2>
                     <br>
                     <br>
             <form action="LoginBussines" method="post" >
@@ -26,7 +28,7 @@ and open the template in the editor.
                 <br>
                 <input type="text" name="user" id="user"/> 
                 <br>
-                ContraseÃ±a
+                Contraseña
                 <br>
                 <input type="password" name="pass" id="pass"/> 
                     <br>
@@ -44,3 +46,9 @@ and open the template in the editor.
         
     </body>
 </html>
+
+
+<% 
+
+LoginBussines lbussines=new LoginBussines();
+%>
