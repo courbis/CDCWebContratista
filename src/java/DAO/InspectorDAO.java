@@ -2,10 +2,12 @@
 package DAO;
 
 import BD.Conexion;
+import Entidad.Inspector;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 
 public class InspectorDAO {
@@ -22,15 +24,22 @@ public class InspectorDAO {
         ResultSet resultSet= statement.executeQuery(query);
 }
     
-    public void obtenerInspector() throws SQLException{
-    query="select nombre, apellido, rut from inspector";
-        Connection connection=conexion.conectarBD();
+    public static LinkedList<Inspector> obtenerInspector() throws SQLException{
+        LinkedList<Inspector> listaInspector=new LinkedList<Inspector>();
+    String query="select nombre, apellido, rut from inspector";
+        Connection connection=Conexion.conectarBD();
         Statement statement= connection.createStatement();
-        ResultSet resultSet= statement.executeQuery(query);    
-        String arregloInspector[][];
+        ResultSet resultSet= statement.executeQuery(query);  
         while(resultSet.next()){
+            Inspector inspector=new Inspector();
+            inspector.setNombre(resultSet.getString("nombre"));
+            inspector.setApellido(resultSet.getString("apellido"));
+            inspector.setRut(resultSet.getString("rut"));
+            listaInspector.add(inspector);
+            
             
         }
+        return listaInspector;
             
         
     }

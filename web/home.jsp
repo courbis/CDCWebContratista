@@ -8,6 +8,11 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="Bussines.ObraBussines" %>
 <%@page import="Entidad.Obra" %>
+
+<%@page import="Entidad.Inspector" %>
+<%@page import="Entidad.Sector" %>
+<%@page import="Entidad.SubSector" %>
+<%@page import="Bussines.AsignarBussines" %>
 <%
     
     String nombre=request.getParameter("nombre");
@@ -102,20 +107,56 @@
                         <div class="span2">
                 Nombre Inspector 
                 </div>
-                <div class="span10">
+                <div class="span10">                    
+               
                 <select name="comboInspector">
+                     <%    
+                        LinkedList<Inspector> listInspector=AsignarBussines.ListaInspector();
+                        for(int i=0;i<listInspector.size();i++){
+                            out.println("<option>");
+                            out.println(listInspector.get(i).getNombre()+" "+listInspector.get(i).getApellido()+", "+listInspector.get(i).getRut());
+                            out.println("<option>");
+                        }
+                    %>                      
                 </select>
+                               
                     </div>        
                         <div class="span2">Sector
                             </div>
                         
-                        <div class="span10"><select name="comboSectorAsignar">
+                        <div class="span10">
+                            <select name="comboSectorAsignar">
+                                
+                            <%    
+                        LinkedList<Sector> listSector=AsignarBussines.ListaSector();
+                        for(int i=0;i<listSector.size();i++){
+                            out.println("<option>");
+                            out.println(listSector.get(i).getNombre());
+                            out.println("<option>");
+                        }
+                    %>
+                                
                             </select>
                         </div>
                         <div class="span2">Sub sector
                             </div>
-                        <div class="span10"><select name="comboSubSectorAsignar">
-                                   </select></div>
+                        <div class="span10">
+                            <select name="comboSubSectorAsignar">
+                                
+                                            <%    
+                                                int e=1;
+                                                
+                        LinkedList<SubSector> listSubSector=AsignarBussines.ListaSubSector(e);//<--- Variable bruta (Cambiar "e")
+                        for(int i=0;i<listSubSector.size();i++){
+                            out.println("<option>");
+                            out.println(listSubSector.get(i).getNombre());
+                            out.println("<option>");
+                        }
+                    %>
+                                
+                            </select>
+                            
+                        </div>
                 </div>
                 </div>
                 <input type="submit" value="Asignar" id="btnAsignar"/>

@@ -11,8 +11,5 @@ document.getElementById('bodyAsignar').style.display='none';
 document.getElementById('bodyVisualizar').style.display='block'
 }
 
-function obtenerNombreObra({
-    
-})
 
 

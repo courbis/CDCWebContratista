@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,10 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginBussines", urlPatterns = {"/LoginBussines"})
 public class LoginBussines extends HttpServlet {
 
-String user="";
-String pass="";
-String nombre="";
-String apellido="";
+String user;
+String pass;
+String nombre;
+String apellido;
 
     public void obtenerDatosAutenticacion() throws SQLException{
         usuarioDAO uDAO= new usuarioDAO();
@@ -58,11 +59,20 @@ String apellido="";
         
         obtenerDatosAutenticacion();
       
-        
-        response.setContentType("text/html;charset=UTF-8");
+        if(nombre!=""&&apellido!=""){
+             response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido);
         }
+                }
+        else{
+              
+{           response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+           response.sendRedirect("../CDCWebContratista/AutenticacionIncorrecta.html");
+}
+               
+        }}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
