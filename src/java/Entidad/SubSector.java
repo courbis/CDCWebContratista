@@ -3,17 +3,19 @@ package Entidad;
 
 public class SubSector {
  
-    int id;
-    int idSector;
-    String nombre;
+    String id;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
+    int idSector;
+    String nombre;
+
+   
 
     public int getIdSector() {
         return idSector;

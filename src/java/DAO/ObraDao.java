@@ -21,7 +21,7 @@ public class ObraDao {
     
     public  static LinkedList<Obra> asignar() throws SQLException{
         LinkedList<Obra> listaAsignar=new LinkedList<Obra>();
-                String query="select nombre, direccion from obra where estado='NA';";
+                String query="select id, nombre, direccion from obra where estado='NA';";
        Connection connection=Conexion.conectarBD();
         Statement statement= connection.createStatement();
         ResultSet resultSet= statement.executeQuery(query);
@@ -30,6 +30,7 @@ public class ObraDao {
             Obra obra=new Obra();
             obra.setNombre(resultSet.getString("nombre"));
             obra.setDireccion(resultSet.getString("direccion"));
+            obra.setId(Integer.parseInt(resultSet.getString("id")));
             listaAsignar.add(obra);
         }
         }catch(Exception e){

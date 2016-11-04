@@ -5,10 +5,7 @@
  */
 package Bussines;
 
-import DAO.usuarioDAO;
-import Entidad.Usuario;
-import com.sun.corba.se.impl.activation.ServerMain;
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+import DAO.AsignarDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -19,60 +16,39 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Julio
  */
-@WebServlet(name = "LoginBussines", urlPatterns = {"/LoginBussines"})
-public class LoginBussines extends HttpServlet {
+@WebServlet(name = "DataAsign", urlPatterns = {"/DataAsign"})
+public class DataAsign extends HttpServlet {
+String obra;
+String sector;
+String subSector;
+String inspector;
 
-String user;
-String pass;
-String nombre;
-String apellido;
+public void insertar(String obra, String sector, String subSector, String inspector) throws SQLException{
+    AsignarDAO dao=new AsignarDAO();
+    dao.Asignar(obra, sector, subSector, inspector);
+}
 
-    public void obtenerDatosAutenticacion() throws SQLException{
-        usuarioDAO uDAO= new usuarioDAO();
-      
-        uDAO.autenticacion(user,pass);
-        nombre=uDAO.nombre();
-        apellido=uDAO.apellido();
-        }
-    
-    
-    
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        user=request.getParameter("user");
-        pass=request.getParameter("pass");        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+        inspector=request.getParameter("comboInspector");
+        sector=request.getParameter("combo");
+        subSector=request.getParameter("comboSubSectorAsignar");
+        obra=request.getParameter("idObra");
         
-        obtenerDatosAutenticacion();
-      
-        if(nombre!=""&&apellido!=""){
-             response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido+"&valor=");
+            insertar(obra, sector, subSector, inspector);
+        
+        out.println("Inspector="+inspector+"<br>");
+        out.println("Sector="+sector+"<br>");
+        out.println("sub Sector="+subSector+"<br>");
+        out.println("Obra="+obra+"<br>");
         }
-                }
-        else{
-              
-{           response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           response.sendRedirect("../CDCWebContratista/AutenticacionIncorrecta.html");
-}
-               
-        }}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,7 +66,7 @@ String apellido;
     try {
         processRequest(request, response);
     } catch (SQLException ex) {
-        Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(DataAsign.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
@@ -108,7 +84,7 @@ String apellido;
     try {
         processRequest(request, response);
     } catch (SQLException ex) {
-        Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(DataAsign.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 

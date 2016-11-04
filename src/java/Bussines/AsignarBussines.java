@@ -17,8 +17,12 @@ public class AsignarBussines {
         return AsignarDAO.obtenerSector();
     }
     
-    public static LinkedList ListaSubSector(int id) throws SQLException{
+    public static LinkedList ListaSubSector(String id) throws SQLException{
         return AsignarDAO.obtenerSubSector(id);
+    }
+    public void Asignar(String idObra, String idSector, String idSubSector, String idInspector) throws SQLException{
+     AsignarDAO aO=new AsignarDAO();
+     aO.Asignar(idObra, idSector, idSubSector, idInspector);
     }
     
 }
