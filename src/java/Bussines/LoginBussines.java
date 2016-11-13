@@ -62,7 +62,7 @@ String apellido;
         if(nombre!=""&&apellido!=""){
              response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido+"&valor=");
+           response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido+"&idObra=0");
         }
                 }
         else{

@@ -23,33 +23,41 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "DataAsign", urlPatterns = {"/DataAsign"})
 public class DataAsign extends HttpServlet {
-String obra;
-String sector;
-String subSector;
-String inspector;
+int obra;
+int sector;
+int subSector;
+int inspector;
+int formulario;
 
-public void insertar(String obra, String sector, String subSector, String inspector) throws SQLException{
+public void insertar(int obra, int sector, int subSector, int inspector, int formulario) throws SQLException{
     AsignarDAO dao=new AsignarDAO();
-    dao.Asignar(obra, sector, subSector, inspector);
+    dao.Asignar(obra, sector, subSector, inspector, formulario);
 }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-        inspector=request.getParameter("comboInspector");
-        sector=request.getParameter("combo");
-        subSector=request.getParameter("comboSubSectorAsignar");
-        obra=request.getParameter("idObra");
-        
-            insertar(obra, sector, subSector, inspector);
+        inspector=Integer.parseInt(request.getParameter("comboInspector"));
+        sector=Integer.parseInt(request.getParameter("combo"));
+        subSector=Integer.parseInt(request.getParameter("comboSubSectorAsignar"));
+        formulario=Integer.parseInt(request.getParameter("comboTipoFormulario"));
+        obra=Integer.parseInt(request.getParameter("idObra"));
+      
+            insertar(obra, sector, subSector, inspector, formulario);
         
         out.println("Inspector="+inspector+"<br>");
         out.println("Sector="+sector+"<br>");
         out.println("sub Sector="+subSector+"<br>");
         out.println("Obra="+obra+"<br>");
-        }
-    }
+        out.println("Formulario="+formulario+"<br>");
+        
+       /* out.println("Inspector="+request.getParameter("comboInspector")+"<br>");
+        out.println("Sector="+request.getParameter("combo")+"<br>");
+        out.println("sub Sector="+request.getParameter("comboSubSectorAsignar")+"<br>");
+        out.println("formula="+request.getParameter("comboTipoFormulario")+"<br>");
+        out.println("Obra="+request.getParameter("idObra")+"<br>");*/
+        }}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

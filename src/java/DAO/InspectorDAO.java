@@ -26,7 +26,7 @@ public class InspectorDAO {
     
     public static LinkedList<Inspector> obtenerInspector() throws SQLException{
         LinkedList<Inspector> listaInspector=new LinkedList<Inspector>();
-    String query="select nombre, apellido, rut from inspector";
+    String query="select id_inspector,nombre, apellido, rut from inspector";
         Connection connection=Conexion.conectarBD();
         Statement statement= connection.createStatement();
         ResultSet resultSet= statement.executeQuery(query);  
@@ -35,6 +35,7 @@ public class InspectorDAO {
             inspector.setNombre(resultSet.getString("nombre"));
             inspector.setApellido(resultSet.getString("apellido"));
             inspector.setRut(resultSet.getString("rut"));
+            inspector.setId(resultSet.getInt("id_inspector"));
             listaInspector.add(inspector);
             
             

@@ -4,6 +4,7 @@
     Author     : Julio
 --%>
 
+<%@page import="Entidad.Formulario"%>
 <%@page import="Bussines.InspectorBussines"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.LinkedList"%>
@@ -18,8 +19,8 @@
     
     String nombre=request.getParameter("nombre");
     String apellido=request.getParameter("apellido");
-    
-%>
+    int obra=Integer.parseInt(request.getParameter("idObra"));
+    %>
 
               
                         
@@ -43,6 +44,7 @@
             $("#comboss").html(data);});
         }            
         </script>
+
         
     
         
@@ -140,10 +142,11 @@
                     
                     
                     <select name="comboInspector" onclick="prueba()">
+                        <option>Seleccione</option>
                   <%
                  LinkedList<Inspector> listaInspector=InspectorBussines.ListaInspector();
                  for(int i=0;i<listaInspector.size();i++){
-                     out.println("<option value='"+listaInspector.get(i).getRut()+"'>");
+                     out.println("<option value='"+listaInspector.get(i).getId()+"'>");
                      out.println(listaInspector.get(i).getNombre()+" "+listaInspector.get(i).getApellido());
                      out.println("</option>");
                  }
@@ -156,15 +159,25 @@
                         
                         <div class="span10">
                             <select name="combo" onchange="actComboSS()">
-                                
+                                <option>Seleccione</option>
                             <%    
-                        LinkedList<Sector> listSector=AsignarBussines.ListaSector();
-                        for(int i=0;i<listSector.size();i++){
+                                                  
+                                                                                                      
+                                 LinkedList<Sector> listSector=AsignarBussines.ListaSector(obra);
+                                 
+                                        for(int i=0;i<listSector.size();i++){
                             out.println("<option value='"+listSector.get(i).getId()+"'>");
                             out.println(listSector.get(i).getNombre());
                             out.println("</option>");
-                                     }                                                          
+
+                            
+                            
+                                     }    
+                                
+                                      
+                            
                               %>
+                              
                                 
                             </select>
                         </div>
@@ -177,8 +190,34 @@
                                                                          
                             </select>
                             
+                        
+                            
                             <input type="hidden" name="idObra" value=<%=request.getParameter("idObra")%>>                                               
                         </div>
+                        
+                        <div class="span2"></div>
+                        <div class="span10">
+                            <select name="comboTipoFormulario" id="tipoFormulario">
+                                <option>Seleccione</option>
+                    <%    
+                                                  
+                                                                                                      
+                                 LinkedList<Formulario> listFormulario=AsignarBussines.ListaFormulario();
+                                 
+                                        for(int i=0;i<listFormulario.size();i++){
+                            out.println("<option value='"+listFormulario.get(i).getId()+"'>");
+                            out.println(listFormulario.get(i).getNombre());
+                            out.println("</option>");
+
+                            
+                            
+                                     }    
+                                
+                                      
+                            
+                              %>
+                            </select>
+                            </div>
                 </div>
                                    <input type="submit" value="Asignar" id="btnAsignar"/>
                 </div>

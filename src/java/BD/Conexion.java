@@ -28,7 +28,7 @@ public class Conexion {
             // Declaración de valores
             //     String url = "jdbc:mysql://localhost/utez-test"; // Cadena de conexión para mysql
             String url = "jdbc:sqlserver://USUARIO-HP:1433;"
-                    + "databaseName=cdc_web ;integratedSecurity=false;";  // Cadena de conexión para mysql
+                    + "databaseName=cdc_contratista ;integratedSecurity=false;";  // Cadena de conexión para mysql
 
             String login = "courbis";
             String password = "6186";

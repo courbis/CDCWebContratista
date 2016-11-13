@@ -3,7 +3,9 @@
 <%@page import="Entidad.SubSector"%>
 <%@page import="java.util.LinkedList"%>
 <select name="comboSubSectorAsignar">
-    <%String id=request.getParameter("combo");
+    
+
+    <%int id=Integer.parseInt(request.getParameter("combo"));
     
      LinkedList<SubSector> listSubSector=AsignarBussines.ListaSubSector(id);
      for(int i=0;i<listSubSector.size();i++){
@@ -12,6 +14,5 @@
          out.println("</option>");
      }
     
-
     %>
 </select>
