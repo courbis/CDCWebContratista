@@ -33,7 +33,7 @@ and open the template in the editor.
                 <input type="password" name="pass" id="pass"/> 
                     <br>
                     <br>
-            <input type="submit" name="entrar" id="entrar"/> 
+                    <input type="submit" name="entrar" id="entrar" value="Entrar"/> 
         </form>
                     <img id="imgInspeccion" src="complementos/imagenes/img_inspeccion.png"/>
                     <h4 id="slogan">Control de calidad para obras civiles</h4>

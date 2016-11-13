@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Julio
 */
 body{
-    background-color:oldlace;
+    background-color:#f5f5f5;
 }
 
 #slogan{
@@ -31,5 +31,5 @@ body{
     border-width: 3px;
     border-color: #fff;
     margin-top: 150px;
-    background-color:papayawhip;
+    background-color:#faf2cc;
 }

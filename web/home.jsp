@@ -31,8 +31,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="complementos/bootstrap/css/bootstrap.css"/>    
-        <link rel="stylesheet" type="text/css" href="complementos/css/home.css"/>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+       <link rel="stylesheet" type="text/css" href="complementos/css/home.css"/>
         <link rel="stylesheet" type="text/css" href="complementos/css/asignar.css"/>
         <script type="text/javascript" src="complementos/js/jquery-3.1.1.min.js"></script> 
         
@@ -54,21 +54,25 @@
     <body onload="form1.submit();">
         <div class="container">
             <div class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <a href="index.jsp">Salir <span class="glyphicon glyphicon-log-out"></span></a>
+                </div>
                 
             <%-- Bienvenido--%>    
-            <div class="span12">
+            <div class="col-md-12">
                 <h3 id="bienvenido"> Bienvenido <%=nombre%> <%=apellido%></h3>
 
             </div>   
             <%--Fin Bienvenido--%>     
             
             <%--Botonera--%> 
-            <div class="span6">              
+            <div class="col-md-6">              
                
                 <input type="submit" class="boton" value="Asignar" onclick="mostrarListaA()">  
 
             </div>
-            <div class="span6">
+            <div class="col-md-6">
                
                 <input type="submit" class="boton" value="Visualizar" onclick="mostrarListaV()">                   
                           
@@ -76,8 +80,8 @@
             <%--Fin Botonera--%>
             
             <%--Tabla--%>
-            <div class="span2"></div>
-            <div class="span8">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <div id="contenedorTabla">
       
                     <table id="tabla" border="1">
@@ -88,7 +92,7 @@
                             
                             </tr>
                         </thead>
-                        
+
                                        <tbody id="bodyAsignar" class="noVisible">
                                       <%    
                         LinkedList<Obra> listAsignar=ObraBussines.asignar();
@@ -98,10 +102,14 @@
                             out.println("<td>"+listAsignar.get(i).getDireccion()+"</td>");
                             out.println("</tr>");
                         }
+                        
+
                     %>                              
              
-                                       <a  ></a>
+                                       
                         </tbody>
+                        
+                        
                         
                         <tbody id="bodyVisualizar" class="noVisible">
                          <%    
@@ -114,13 +122,14 @@
                         }
                     %>
                     </tbody>
+                    
                     </table>
 
                 </div>
             </div>
              <%--Fin tabla--%>       
                     
-            <div class="span2"></div>
+            <div class="col-md-2"></div>
             </div>
         </div>
                     <%-- Ventana pop-up-Asignar--%>
@@ -134,10 +143,10 @@
                                 
                 <div class="container">
                    <div class="row">
-                        <div class="span2">
+                        <div class="col-md-2">
                 Nombre Inspector 
                 </div>
-                <div class="span10">                    
+                <div class="col-md-10">                    
                
                     
                     
@@ -153,11 +162,12 @@
                  %>      
                 </select>
                                
-                    </div>        
-                        <div class="span2">Sector
+                    </div>  
+                <br>
+                        <div class="col-md-2">Sector
                             </div>
                         
-                        <div class="span10">
+                        <div class="col-md-10">
                             <select name="combo" onchange="actComboSS()">
                                 <option>Seleccione</option>
                             <%    
@@ -181,9 +191,9 @@
                                 
                             </select>
                         </div>
-                        <div class="span2">Sub sector
+                        <div class="col-md-2">Sub sector
                             </div>
-                        <div class="span10">
+                        <div class="col-md-10">
                             <select name="comboSubSectorAsignar" id="comboss">
                                 
                                 <option value="">Seleccione</option>
@@ -195,8 +205,10 @@
                             <input type="hidden" name="idObra" value=<%=request.getParameter("idObra")%>>                                               
                         </div>
                         
-                        <div class="span2"></div>
-                        <div class="span10">
+                        <div class="col-md-2">
+                            Tipo Formulario
+                        </div>
+                        <div class="col-md-10">
                             <select name="comboTipoFormulario" id="tipoFormulario">
                                 <option>Seleccione</option>
                     <%    
@@ -219,7 +231,7 @@
                             </select>
                             </div>
                 </div>
-                                   <input type="submit" value="Asignar" id="btnAsignar"/>
+                                   <input style="margin-top: 20px;" type="submit" value="Asignar" id="btnAsignar"/>
                 </div>
                
 	</div>
