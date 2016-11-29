@@ -153,7 +153,7 @@
                     <select name="comboInspector" onclick="prueba()">
                         <option>Seleccione</option>
                   <%
-                 LinkedList<Inspector> listaInspector=InspectorBussines.ListaInspector();
+                 LinkedList<Inspector> listaInspector=AsignarBussines.ListaInspector();
                  for(int i=0;i<listaInspector.size();i++){
                      out.println("<option value='"+listaInspector.get(i).getId()+"'>");
                      out.println(listaInspector.get(i).getNombre()+" "+listaInspector.get(i).getApellido());

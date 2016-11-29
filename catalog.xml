@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://ws.cdyne.com/NotifyWS/phonenotify.asmx" uri="src/conf/xml-resources/web-service-references/phonenotify/wsdl/ws.cdyne.com/NotifyWS/phonenotify.asmx"/>
+    <system systemId="http://fx.cloanto.com/webservices/CloantoCurrencyServer.asmx" uri="src/conf/xml-resources/web-service-references/CloantoCurrencyServer/wsdl/fx.currencysystem.com/webservices/CurrencyServer4.asmx"/>
+    <system systemId="http://www.dneonline.com/calculator.asmx" uri="src/conf/xml-resources/web-service-references/calculator/wsdl/www.dneonline.com/calculator.asmx"/>
+    <system systemId="http://www.dneonline.com/calculator.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/calculator/wsdl/www.dneonline.com/calculator.asmx.wsdl"/>
+</catalog>

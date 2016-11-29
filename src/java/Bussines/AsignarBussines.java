@@ -29,5 +29,6 @@ public class AsignarBussines {
      AsignarDAO aO=new AsignarDAO();
      aO.Asignar(idObra, idSector, idSubSector, idInspector,idFormulario);
     }
+
     
 }

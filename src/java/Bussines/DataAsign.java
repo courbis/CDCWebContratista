@@ -43,14 +43,19 @@ public void insertar(int obra, int sector, int subSector, int inspector, int for
         subSector=Integer.parseInt(request.getParameter("comboSubSectorAsignar"));
         formulario=Integer.parseInt(request.getParameter("comboTipoFormulario"));
         obra=Integer.parseInt(request.getParameter("idObra"));
+        String nombre=request.getParameter("nombre");
+        String apellido=request.getParameter("apellido");
       
             insertar(obra, sector, subSector, inspector, formulario);
         
-        out.println("Inspector="+inspector+"<br>");
-        out.println("Sector="+sector+"<br>");
-        out.println("sub Sector="+subSector+"<br>");
-        out.println("Obra="+obra+"<br>");
-        out.println("Formulario="+formulario+"<br>");
+out.println(" <script type=\"text/javascript\">");
+out.println("alert('Asignado')");
+out.println("</script>");
+
+
+
+        
+        
         
        /* out.println("Inspector="+request.getParameter("comboInspector")+"<br>");
         out.println("Sector="+request.getParameter("combo")+"<br>");

@@ -17,7 +17,7 @@ public class AsignarDAO {
     
     public static LinkedList<Inspector> obtenerInspector() throws SQLException{
         LinkedList<Inspector> listaInspector=new LinkedList<Inspector>();
-    String query="select id_inspector, nombre, apellido, rut from inspector";
+    String query="select id_usuario, nombre, apellido, rut from usuario where tipo_usuario=2";
         Connection connection=Conexion.conectarBD();
         Statement statement= connection.createStatement();
         ResultSet resultSet= statement.executeQuery(query);  
@@ -26,7 +26,7 @@ public class AsignarDAO {
             inspector.setNombre(resultSet.getString("nombre"));
             inspector.setApellido(resultSet.getString("apellido"));
             inspector.setRut(resultSet.getString("rut"));
-            inspector.setId(resultSet.getInt("id_inspector"));
+            inspector.setId(resultSet.getInt("id_usuario"));
             listaInspector.add(inspector);    
             
         }
@@ -70,8 +70,8 @@ public class AsignarDAO {
 }
     
     public static void Asignar(int idObra, int idSector, int idSubSector, int idInspector, int idFormulario) throws SQLException{
-        String query="insert into tarea_asignada(id_formulario_asignado,id_inspector,id_sector_obra,id_subsector,id_obra,fecha,id_tipo_formulario)values"
-                + "((SELECT MAX(id_formulario_asignado)+1 from tarea_asignada),"+idInspector+","+idSector+","+idSubSector+","+idObra+",GETDATE(),"+idFormulario+");";
+        String query="insert into tarea_asignada(id_tarea_asignada,id_usuario,id_sector_obra,id_subsector,id_obra,fecha,id_tipo_formulario)values"
+                + "((SELECT MAX(id_tarea_asignada)+1 from tarea_asignada),"+idInspector+","+idSector+","+idSubSector+","+idObra+",GETDATE(),"+idFormulario+");";
         Connection connection=Conexion.conectarBD();
         Statement statement= connection.createStatement();
         statement.executeUpdate(query);
