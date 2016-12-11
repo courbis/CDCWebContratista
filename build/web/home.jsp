@@ -21,7 +21,7 @@
     String nombre=request.getParameter("nombre");
     String apellido=request.getParameter("apellido");
     int obra=Integer.parseInt(request.getParameter("idObra"));
-    int idTareaAsignada=Integer.parseInt(request.getParameter("idTareaAsignada"));
+
     %>
 
               
@@ -97,7 +97,7 @@
 
                                        <tbody>
                                       <%    
-                        LinkedList<Obra> listAsignar=ObraBussines.asignar();
+                         LinkedList<Obra> listAsignar=ObraBussines.asignar();
                         for(int i=0;i<listAsignar.size();i++){
                             out.println("<tr>");
                             out.println("<td value='"+listAsignar.get(i).getId()+"'><a href='?nombre="+nombre+"&apellido="+apellido+"&idObra="+listAsignar.get(i).getId()+"#openModalAsignar'>"+listAsignar.get(i).getNombre()+"</a></td>");
