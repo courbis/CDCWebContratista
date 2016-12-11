@@ -1,4 +1,4 @@
-<%@page import="Bussines.LoginBussines"%>
+<%@page import="RestIntegracion.LoginBussines"%>
 <%@page import="java.sql.SQLException"%>
 <!DOCTYPE html>
 <!--

@@ -1,5 +1,5 @@
 
-package Bussines;
+package RestIntegracion;
 
 import Entidad.Formulario;
 import Entidad.Inspector;

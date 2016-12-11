@@ -4,16 +4,18 @@
     Author     : Julio
 --%>
 
+<%@page import="RestIntegracion.FormularioCompletoBussines"%>
+<%@page import="Entidad.FormularioCompleto"%>
 <%@page import="Entidad.Formulario"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="Bussines.ObraBussines" %>
+<%@page import="RestIntegracion.ObraBussines" %>
 <%@page import="Entidad.Obra" %>
 
 <%@page import="Entidad.Inspector" %>
 <%@page import="Entidad.Sector" %>
 <%@page import="Entidad.SubSector" %>
-<%@page import="Bussines.AsignarBussines" %>
+<%@page import="RestIntegracion.AsignarBussines" %>
 <%
     
     String nombre=request.getParameter("nombre");
@@ -83,7 +85,7 @@
             <div class="col-md-8">
                 <div id="contenedorTabla">
       
-                    <table id="tabla" border="1">
+                    <table id="bodyAsignar" border="1" style="width: 100%" class="noVisible">
                         <thead>
                             <tr>
                                 <th class="tituloTabla" style='width:50%'><h5>Nombre de obra</h5></th>
@@ -92,7 +94,7 @@
                             </tr>
                         </thead>
 
-                                       <tbody id="bodyAsignar" class="noVisible">
+                                       <tbody>
                                       <%    
                         LinkedList<Obra> listAsignar=ObraBussines.asignar();
                         for(int i=0;i<listAsignar.size();i++){
@@ -107,16 +109,27 @@
              
                                        
                         </tbody>
+                           </table>
+                    
+                    <table id="bodyVisualizar" class="noVisible" style="width: 100%" border="1">
                         
-                        
-                        
-                        <tbody id="bodyVisualizar" class="noVisible">
+                               <thead>
+                            <tr>
+                                <th class="tituloTabla" style='width:20%'><h5>Obra</h5></th>
+                                <th class="tituloTabla" style='width:20%'><h5>Fecha</h5></th>
+                                <th class="tituloTabla" style='width:20%'><h5>Inspector</h5></th>
+                            
+                            </tr>
+                        </thead>
+                               
+                        <tbody >
                          <%    
-                        LinkedList<Obra> listVisualizar=ObraBussines.visualizar();
+                        LinkedList<FormularioCompleto> listVisualizar=FormularioCompletoBussines.visualizarGlobal();
                         for(int i=0;i<listVisualizar.size();i++){
-                            out.println("<tr value='"+listVisualizar.get(i).getId()+"' onclick=''>");
-                            out.println("<td><a  href='#openModalVisualizar'>"+listVisualizar.get(i).getNombre()+"</a></td>");
-                            out.println("<td>"+listVisualizar.get(i).getDireccion()+"</td>");
+                            out.println("<tr>");
+                            out.println("<td value='"+listVisualizar.get(i).getIdTareaAsignada()+"'><a  href='?nombre="+nombre+"&apellido="+apellido+"&idTareaAsignada="+listVisualizar.get(i).getIdTareaAsignada()+"'>"+listVisualizar.get(i).getObra()+"</a></td>");
+                            out.println("<td>"+listVisualizar.get(i).getFecha()+"</td>");
+                            out.println("<td>"+listVisualizar.get(i).getInspector()+"</td>");
                             out.println("</tr>");
                         }
                     %>

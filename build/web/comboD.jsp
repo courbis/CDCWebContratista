@@ -1,4 +1,4 @@
-<%@page import="Bussines.AsignarBussines"%>
+<%@page import="RestIntegracion.AsignarBussines"%>
 <%@page import="Entidad.SubSector"%>
 <%@page import="Entidad.SubSector"%>
 <%@page import="java.util.LinkedList"%>
