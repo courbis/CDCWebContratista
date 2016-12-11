@@ -5,12 +5,16 @@
  */
 package Bussines;
 
-import DAO.usuarioDAO;
 import Entidad.Usuario;
 import com.sun.corba.se.impl.activation.ServerMain;
 import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +24,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -33,13 +40,49 @@ String pass;
 String nombre;
 String apellido;
 
-    public void obtenerDatosAutenticacion() throws SQLException{
-        usuarioDAO uDAO= new usuarioDAO();
-      
-        uDAO.autenticacion(user,pass);
-        nombre=uDAO.nombre();
-        apellido=uDAO.apellido();
-        }
+        
+    public void recorrerJSONLogin(String user, String pass) throws JSONException{
+
+          try {
+
+		URL url = new URL("http://localhost:8084/WebServiceCDC/webresources/generic/Autenticacion?rut="+user+"&clave="+pass);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Accept", "application/json");
+
+		if (conn.getResponseCode() != 200) {
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ conn.getResponseCode());
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+			(conn.getInputStream())));
+
+		String output;
+		output = br.readLine();
+                
+                JSONObject jSONObject=new JSONObject(output);
+                
+                
+           nombre = jSONObject.getString("nombre");
+            apellido=jSONObject.getString("apellido");
+                
+         
+
+             conn.disconnect();          
+		
+	  } catch (MalformedURLException e) {
+
+		e.printStackTrace();
+
+	  } catch (IOException e) {
+
+		e.printStackTrace();
+
+	  }
+
+    }
+            
     
     
     
@@ -53,13 +96,13 @@ String apellido;
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, JSONException {
         user=request.getParameter("user");
-        pass=request.getParameter("pass");        
+        pass=request.getParameter("pass");
         
-        obtenerDatosAutenticacion();
-      
-        if(nombre!=""&&apellido!=""){
+       recorrerJSONLogin(user, pass);
+        
+         if(nombre!=""&&apellido!=""){
              response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido+"&idObra=0");
@@ -91,6 +134,8 @@ String apellido;
         processRequest(request, response);
     } catch (SQLException ex) {
         Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (JSONException ex) {
+        Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
@@ -108,6 +153,8 @@ String apellido;
     try {
         processRequest(request, response);
     } catch (SQLException ex) {
+        Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (JSONException ex) {
         Logger.getLogger(LoginBussines.class.getName()).log(Level.SEVERE, null, ex);
     }
     }

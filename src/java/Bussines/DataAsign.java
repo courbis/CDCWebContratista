@@ -5,7 +5,7 @@
  */
 package Bussines;
 
-import DAO.AsignarDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -30,8 +30,8 @@ int inspector;
 int formulario;
 
 public void insertar(int obra, int sector, int subSector, int inspector, int formulario) throws SQLException{
-    AsignarDAO dao=new AsignarDAO();
-    dao.Asignar(obra, sector, subSector, inspector, formulario);
+AsignarBussines asignarBussines=new AsignarBussines();
+asignarBussines.Asignar(obra, sector, subSector, inspector, formulario);
 }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -57,11 +57,11 @@ out.println("</script>");
         
         
         
-       /* out.println("Inspector="+request.getParameter("comboInspector")+"<br>");
+       out.println("Inspector="+request.getParameter("comboInspector")+"<br>");
         out.println("Sector="+request.getParameter("combo")+"<br>");
         out.println("sub Sector="+request.getParameter("comboSubSectorAsignar")+"<br>");
         out.println("formula="+request.getParameter("comboTipoFormulario")+"<br>");
-        out.println("Obra="+request.getParameter("idObra")+"<br>");*/
+        out.println("Obra="+request.getParameter("idObra")+"<br>");
         }}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
