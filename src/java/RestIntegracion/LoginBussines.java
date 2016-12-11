@@ -105,7 +105,7 @@ String apellido;
          if(nombre!=""&&apellido!=""){
              response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido+"&idObra=0");
+           response.sendRedirect("../CDCWebContratista/home.jsp?nombre="+nombre+"&apellido="+apellido+"&idObra=0&idTareaAsignada=0");
         }
                 }
         else{

@@ -21,6 +21,7 @@
     String nombre=request.getParameter("nombre");
     String apellido=request.getParameter("apellido");
     int obra=Integer.parseInt(request.getParameter("idObra"));
+    int idTareaAsignada=Integer.parseInt(request.getParameter("idTareaAsignada"));
     %>
 
               
@@ -127,7 +128,7 @@
                         LinkedList<FormularioCompleto> listVisualizar=FormularioCompletoBussines.visualizarGlobal();
                         for(int i=0;i<listVisualizar.size();i++){
                             out.println("<tr>");
-                            out.println("<td value='"+listVisualizar.get(i).getIdTareaAsignada()+"'><a  href='?nombre="+nombre+"&apellido="+apellido+"&idTareaAsignada="+listVisualizar.get(i).getIdTareaAsignada()+"'>"+listVisualizar.get(i).getObra()+"</a></td>");
+                            out.println("<td value='"+listVisualizar.get(i).getIdTareaAsignada()+"'><a  href='visualizarObra.jsp?idTareaAsignada="+listVisualizar.get(i).getIdTareaAsignada()+"&obra="+listVisualizar.get(i).getObra()+"&fecha="+listVisualizar.get(i).getFecha()+"&inspector="+listVisualizar.get(i).getInspector()+"'>"+listVisualizar.get(i).getObra()+"</a></td>");
                             out.println("<td>"+listVisualizar.get(i).getFecha()+"</td>");
                             out.println("<td>"+listVisualizar.get(i).getInspector()+"</td>");
                             out.println("</tr>");
@@ -254,36 +255,22 @@
                     
                     
                     <%-- Ventana pop-up-Visualizar--%>                   
-                    <div id="openModalAsignar" class="modalDialog">
+                    
+                    <div id="openModalVisualizar" class="modalDialog">
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
-		<h2>Visualizar obra</h2>
-                
+                                
                 <div class="container">
-                    <div class="row">
-                        <div class="span2">
-                Nombre Inspector 
+                   <div class="row">
+
                 </div>
-                <div class="span10">
-                <select name="comboInspector">
-                </select>
-                    </div>        
-                        <div class="span2">Sector
-                            </div>
-                        
-                        <div class="span10"><select name="comboSectorAsignar">
-                            </select>
-                        </div>
-                        <div class="span2">Sub sector
-                            </div>
-                        <div class="span10"><select name="comboSubSectorAsignar">
-                                   </select></div>
+
                 </div>
-                </div>
-                <input type="submit" value="Asignar" id="btnAsignar"/>
+               
 	</div>
-                    
 </div>
+
+        
                     
                     <%--Fin de  Ventana pop-up--%>
         

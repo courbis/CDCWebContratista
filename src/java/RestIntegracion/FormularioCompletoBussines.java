@@ -63,4 +63,53 @@ try {
      return listaFormularioCompleto;
     }
     
+    
+    public static LinkedList<FormularioCompleto> visualizar(int idTareaAsignada) throws JSONException {
+        LinkedList<FormularioCompleto> listaFormularioCompleto=new LinkedList<FormularioCompleto>();
+try {
+
+		URL url = new URL("http://localhost:8084/WebServiceCDC/webresources/generic/visualizar2?idTareaAsignada="+idTareaAsignada);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Accept", "application/json");
+
+		if (conn.getResponseCode() != 200) {
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ conn.getResponseCode());
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+			(conn.getInputStream())));
+
+		String output;
+		output = br.readLine();
+                
+            JSONArray array = new JSONArray(output);
+            for (int i = 0; i < array.length(); i++) {
+            JSONObject row = array.getJSONObject(i);
+            FormularioCompleto fc=new FormularioCompleto();
+            fc.setSector(row.getString("sector"));
+            fc.setSubSector(row.getString("subSector"));
+            fc.setPregunta(row.getString("pregunta"));
+            fc.setRespuesta(row.getString("respuesta"));
+            listaFormularioCompleto.add(fc);
+}
+            conn.disconnect();
+                
+
+		
+
+	  } catch (MalformedURLException e) {
+
+		e.printStackTrace();
+
+	  } catch (IOException e) {
+
+		e.printStackTrace();
+
+	  }
+     return listaFormularioCompleto;
+    }
+
+    
 }
